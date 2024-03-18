@@ -1,0 +1,8 @@
+@import 'styles/colors.module.scss';
+@import 'styles/fonts.module.scss';
+
+.link {
+	color: $primary-blue;
+
+	@include weight_medium;
+}

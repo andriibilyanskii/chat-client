@@ -1,0 +1,60 @@
+@import './colors.module.scss';
+
+// Primary font
+$primary-font: 'Montserrat',
+-apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+Roboto,
+Oxygen,
+Ubuntu,
+Cantarell,
+'Fira Sans',
+'Droid Sans',
+'Helvetica Neue',
+sans-serif;
+
+// Font weights
+$regular: 400;
+$medium: 500;
+$bold: 700;
+
+// Fonts
+@mixin header {
+	font-weight: $bold;
+	font-size: 1.875rem;
+	line-height: 2.4375rem;
+	letter-spacing: 0rem;
+	text-align: center;
+}
+
+@mixin b1 {
+	font-size: 0.9375rem;
+	font-family: $primary-font;
+	line-height: 1.25rem;
+}
+
+@mixin b2 {
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	font-family: $primary-font;
+}
+
+@mixin defaultButtonFont {
+	font-size: 1rem;
+	line-height: 1.3125rem;
+	font-family: $primary-font;
+	font-weight: $medium;
+}
+
+@mixin weight_regular {
+	font-weight: $regular;
+}
+
+@mixin weight_medium {
+	font-weight: $medium;
+}
+
+@mixin weight_bold {
+	font-weight: $bold;
+}

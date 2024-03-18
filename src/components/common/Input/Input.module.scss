@@ -1,0 +1,41 @@
+@import 'styles/colors.module.scss';
+@import 'styles/fonts.module.scss';
+
+.input {
+	@apply rounded-md p-3.5 size-full;
+	border: 1.2px solid $gray-200;
+
+	&:disabled {
+		background: $gray-100;
+	}
+
+	&:invalid {
+		@apply border-red-700;
+	}
+
+	&::placeholder {
+		color: $gray-300;
+	}
+}
+
+.input-container {
+	@apply relative flex size-full flex-col gap-2;
+
+	.inputIcon {
+		@apply absolute top-3 right-3 z-10;
+	}
+
+	p {
+		@include b2;
+	}
+
+	.errorMessage {
+		@apply text-red-700;
+	}
+
+	&_withLabel {
+		.inputIcon {
+			@apply top-10;
+		}
+	}
+}

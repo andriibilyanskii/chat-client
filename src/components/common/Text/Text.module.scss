@@ -1,0 +1,28 @@
+@import 'styles/colors.module.scss';
+@import 'styles/fonts.module.scss';
+
+.text {
+	&_b1 {
+		@include b1();
+	}
+
+	&_b2 {
+		@include b2();
+	}
+
+	&_header {
+		@include header();
+	}
+
+	&-weight_regular {
+		@include weight_regular();
+	}
+
+	&-weight_medium {
+		@include weight_medium();
+	}
+
+	&-weight_bold {
+		@include weight_bold();
+	}
+}
