@@ -5,7 +5,7 @@ import React from 'react';
 import { IUserInfo } from 'interfaces';
 
 const options = {
-	userInfo: {},
+	userInfo: {} as IUserInfo,
 	setUserInfo: (info: IUserInfo) => {},
 };
 

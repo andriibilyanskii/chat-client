@@ -7,7 +7,9 @@ import { IUserInfo } from 'interfaces';
 import './App.scss';
 
 function App(): React.ReactElement {
-	const [userInfo, setUserInfo] = useState<IUserInfo>({} as IUserInfo);
+	const [userInfo, setUserInfo] = useState<IUserInfo>(() =>
+		JSON.parse(localStorage.getItem('user') as any)
+	);
 
 	return (
 		<AppContext.Provider

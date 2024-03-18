@@ -1,12 +1,20 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-import { LoginPage } from 'pages';
+import { LoginPage, ChatPage } from 'pages';
+import { PrivateRoute } from './components';
 
 export const Router = () => {
 	return (
 		<Routes>
-			<Route index element={<Navigate replace to='/auth/login' />} />
+			<Route
+				index
+				element={
+					<PrivateRoute>
+						<ChatPage />
+					</PrivateRoute>
+				}
+			/>
 			<Route path={'/auth'}>
 				<Route path='login' element={<LoginPage />} />
 			</Route>

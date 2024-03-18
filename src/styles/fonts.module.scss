@@ -1,18 +1,19 @@
 @import './colors.module.scss';
 
 // Primary font
-$primary-font: 'Montserrat',
--apple-system,
-BlinkMacSystemFont,
-'Segoe UI',
-Roboto,
-Oxygen,
-Ubuntu,
-Cantarell,
-'Fira Sans',
-'Droid Sans',
-'Helvetica Neue',
-sans-serif;
+$primary-font:
+	'Montserrat',
+	-apple-system,
+	BlinkMacSystemFont,
+	'Segoe UI',
+	Roboto,
+	Oxygen,
+	Ubuntu,
+	Cantarell,
+	'Fira Sans',
+	'Droid Sans',
+	'Helvetica Neue',
+	sans-serif;
 
 // Font weights
 $regular: 400;

@@ -1,10 +1,10 @@
 import React, { FormEvent, useEffect, useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 import { Text, AuthLayout, Link, Button, Icon, Input, AnimateHeight } from 'components';
 import { CONSTANTS } from '../../constants';
 
-import { fetchData, useAppContext, } from 'utils';
+import { fetchData, useAppContext } from 'utils';
 
 import styles from './LoginPage.module.scss';
 
@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const { setUserInfo } = useAppContext();
 
-	const history = useNavigate()
+	const history = useNavigate();
 
 	return (
 		<AuthLayout title={'Log in to your account'}>
@@ -37,7 +37,7 @@ const LoginPage: React.FC = () => {
 					if (response?.token) {
 						setUserInfo(response);
 						localStorage.setItem('user', JSON.stringify(response));
-						history('/')
+						history('/');
 					}
 				}}
 			>
@@ -47,6 +47,7 @@ const LoginPage: React.FC = () => {
 					placeholder={'Enter username'}
 					name={'username'}
 					disabled={isLoading}
+					autofocus={true}
 				/>
 
 				<Button type={'submit'} disabled={!username}>
