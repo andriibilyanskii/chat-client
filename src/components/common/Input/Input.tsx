@@ -10,6 +10,8 @@ interface IProps {
 	type?: 'text' | 'email' | 'password';
 	name?: string;
 	disabled?: boolean;
+	autoFocus?: boolean;
+	required?: boolean;
 }
 
 const Input: React.FC<IProps> = (props) => {

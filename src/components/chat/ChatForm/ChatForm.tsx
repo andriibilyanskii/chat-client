@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
@@ -7,36 +7,48 @@ import { Text, AuthLayout, Link, Button, Icon, Input, AnimateHeight, Users } fro
 import { fetchData, useAppContext } from 'utils';
 
 import styles from './ChatForm.module.scss';
-
-const userName = Date.now();
+import {IMessage} from "../../../interfaces";
 
 const ChatPage: React.FC = () => {
-	const [isLoading, setIsLoading] = useState(false);
-	const { userInfo, socket, receiverUsername } = useAppContext();
+	const [text, setText] = useState('');
+	const { userInfo, socket } = useAppContext();
 
-	const lastMessageRef = useRef<any>(null);
+	const sendMessage = (e: FormEvent<HTMLFormElement>) => {
+		e?.preventDefault();
 
-	// useEffect(() => {
-	// 	lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
-	// }, [messages]);
+		if (text) {
+			const message:IMessage ={
+				text: text,
+				usernameFrom: userInfo.username,
+				usernameTo: 'selectedChatUsername',
+				id: `${socket.id}${Math.random()}`,
+				socketID: socket.id,
+				createdDate: new Date().toISOString()
+			}
+
+			socket.emit('message', message);
+
+			setText('');
+		}
+
+	}
 
 	return (
-		<div className={styles.chatForm}>
-			<Button
-			onClick={() => {
-					socket.emit('message', {
-						text: Date.now() + 'text',
-						usernameFrom: userInfo.username,
-						usernameTo: 'selectedChatUsername',
-						id: `${socket.id}${Math.random()}`,
-						socketID: socket.id,
-					});
-				}}
-			className={styles['chatForm-sendButton']}
-			>
-				Click
+		<form
+			className={styles.chatForm}
+			onSubmit={sendMessage}
+		>
+			<Input
+				value={text}
+				onChange={setText}
+				placeholder={'Enter message'}
+				autoFocus={true}
+				required={true}
+			/>
+			<Button type={'submit'} className={styles['chatForm-sendButton']}>
+				Send
 			</Button>
-		</div>
+		</form>
 	);
 };
 

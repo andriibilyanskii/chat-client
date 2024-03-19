@@ -1,0 +1,13 @@
+@import 'styles/colors.module';
+
+.messageCard {
+	@apply w-fit flex flex-col px-2 py-1;
+
+	&_my {
+		align-self: end;
+	}
+
+	&-dateTime {
+		align-self: end;
+	}
+}

@@ -4,9 +4,8 @@ import { HashRouter } from 'react-router-dom';
 
 import reportWebVitals from './reportWebVitals';
 
-
-import { Provider } from 'react-redux'
-import store from './store'
+import { Provider } from 'react-redux';
+import store from './store';
 
 import { NotificationToast } from './components';
 import App from './App';
@@ -22,7 +21,7 @@ root.render(
 	<React.StrictMode>
 		<HashRouter>
 			<Provider store={store}>
-			<App />
+				<App />
 			</Provider>
 			<NotificationToast />
 		</HashRouter>

@@ -1,5 +1,10 @@
 @import 'styles/colors.module';
 
 .chatForm {
+	background: $primary-white;
 
+	@apply w-full fixed bottom-0 p-4;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 1rem;
 }

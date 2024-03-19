@@ -14,4 +14,5 @@ export { default as AuthLayout } from './auth/AuthLayout/AuthLayout';
 
 export { default as Users } from './chat/Users/Users';
 export { default as ChatForm } from './chat/ChatForm/ChatForm';
-export {default as ChatMessages} from './chat/ChatMessages/ChatMessages'
+export { default as ChatMessages } from './chat/ChatMessages/ChatMessages';
+export { default as MessageCard } from './chat/MessageCard/MessageCard';

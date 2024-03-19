@@ -11,15 +11,16 @@ import {
 	Input,
 	AnimateHeight,
 	Users,
-	ChatForm, ChatMessages,
+	ChatForm,
+	ChatMessages,
 } from 'components';
 import { CONSTANTS } from '../../constants';
 
 import { fetchData, useAppContext } from 'utils';
 
 import styles from './ChatPage.module.scss';
-import {addMessage, addUsers, setUsers} from "../../store/data-reducer";
-import {useAppDispatch} from "../../store/redux-hooks";
+import { addMessage, addUsers, setUsers } from '../../store/data-reducer';
+import { useAppDispatch } from '../../store/redux-hooks';
 
 const userName = Date.now();
 
@@ -28,13 +29,7 @@ const ChatPage: React.FC = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const { userInfo, socket } = useAppContext();
 
-	const history = useNavigate();
-
-	const [typingStatus, setTypingStatus] = useState('');
-	const lastMessageRef = useRef<any>(null);
-
-
-	const dispatch = useAppDispatch()
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		if (userInfo?.username && socket.id) {
@@ -43,11 +38,18 @@ const ChatPage: React.FC = () => {
 	}, [socket.id, userInfo.username]);
 
 	useEffect(() => {
-		socket.on('messageResponse', (data: any) => {
-			dispatch(addMessage(data))
+		let ignore = false;
 
-			console.log({data})
+		socket.on('messageResponse', (data: any) => {
+			if (!ignore) {
+				dispatch(addMessage(data));
+				console.log({ data });
+			}
 		});
+
+		return () => {
+			ignore = true;
+		};
 	}, [socket]);
 
 	useEffect(() => {
@@ -58,13 +60,9 @@ const ChatPage: React.FC = () => {
 		socket.on('onConnect', (data: any) => dispatch(setUsers(data)));
 	}, [socket]);
 
-	// useEffect(() => {
-	// 	lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
-	// }, [messages]);
-
 	return (
 		<div className={styles.chatPage}>
-			<ChatMessages/>
+			<ChatMessages />
 			<ChatForm />
 		</div>
 	);
