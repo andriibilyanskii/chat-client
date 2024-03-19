@@ -11,7 +11,7 @@ import styles from './LoginPage.module.scss';
 const LoginPage: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-	const { setUserInfo } = useAppContext();
+	const { setUserInfo, socket } = useAppContext();
 
 	const history = useNavigate();
 
@@ -21,24 +21,11 @@ const LoginPage: React.FC = () => {
 				onSubmit={async (e: FormEvent<HTMLFormElement>) => {
 					e?.preventDefault();
 
-					const response = await fetchData(
-						'/auth/login',
-						true,
-						{
-							body: {
-								username,
-							},
-						},
-						{
-							setIsLoading,
-						}
-					);
+					socket.emit('newUser', { username, socketID: socket.id });
 
-					if (response?.token) {
-						setUserInfo(response);
-						localStorage.setItem('user', JSON.stringify(response));
-						history('/');
-					}
+					localStorage.setItem('user', JSON.stringify({ username }));
+					setUserInfo({ username });
+					history('/');
 				}}
 			>
 				<Input

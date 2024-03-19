@@ -17,7 +17,7 @@ async function fetchData<Type>(
 ) {
 	other?.setIsLoading?.(true);
 
-	const _url = defaultAPI ? CONSTANTS.BACKEND_URL + url : url;
+	const _url = defaultAPI ? CONSTANTS.BACKEND_URL_API + url : url;
 
 	return await axios({
 		method: params?.method || 'post',

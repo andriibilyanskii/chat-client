@@ -9,7 +9,7 @@ interface IPrivateRouter {
 const PrivateRoute = (props: IPrivateRouter) => {
 	const { userInfo } = useAppContext();
 
-	if (!userInfo?._id) {
+	if (!userInfo) {
 		return <Navigate replace to='/auth/login' />;
 	} else {
 		return <>{props.children}</>;

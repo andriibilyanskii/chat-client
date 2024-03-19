@@ -8,5 +8,6 @@ export { default as Link } from './common/Link/Link';
 export { default as AnimateHeight } from './common/AnimateHeight/AnimateHeight';
 export { default as NotificationToast } from './common/NotificationToast/NotificationToast';
 export { default as PrivateRoute } from './common/PrivateRoute/PrivateRoute';
+export { default as WebSocket } from './common/WebSocket/WebSocket';
 
-export const AuthLayout = React.lazy(() => import('./auth/AuthLayout/AuthLayout'));
+export { default as AuthLayout } from './auth/AuthLayout/AuthLayout';

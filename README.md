@@ -2,6 +2,8 @@
 
 ## [Demo Link]()
 
+## The message in the hosting: "Your free instance will spin down with inactivity, which can delay requests by 50 seconds or more"
+
 ## Available Scripts
 
 In the project directory, you can run:
