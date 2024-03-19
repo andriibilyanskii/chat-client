@@ -15,12 +15,16 @@ function App(): React.ReactElement {
 		JSON.parse(localStorage.getItem('user') as any)
 	);
 
+	const [receiverUsername, setReceiverUsername] = useState('');
+
 	return (
 		<AppContext.Provider
 			value={{
 				userInfo,
 				setUserInfo,
 				socket,
+				receiverUsername,
+				setReceiverUsername,
 			}}
 		>
 			<Router />

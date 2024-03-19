@@ -2,19 +2,22 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { LoginPage, ChatPage } from 'pages';
-import { PrivateRoute } from './components';
+import { PageLayout, PrivateRoute } from './components';
 
 export const Router = () => {
 	return (
 		<Routes>
-			<Route
-				index
-				element={
-					<PrivateRoute>
-						<ChatPage />
-					</PrivateRoute>
-				}
-			/>
+			<Route path='/' element={<PageLayout />}>
+				<Route
+					path={'/'}
+					element={
+						<PrivateRoute>
+							<ChatPage />
+						</PrivateRoute>
+					}
+				/>
+			</Route>
+
 			<Route path={'/auth'}>
 				<Route path='login' element={<LoginPage />} />
 			</Route>

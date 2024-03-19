@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
 					placeholder={'Enter username'}
 					name={'username'}
 					disabled={isLoading}
-					autofocus={true}
+					label={'Username'}
 				/>
 
 				<Button type={'submit'} disabled={!username}>

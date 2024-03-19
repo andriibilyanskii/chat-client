@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Text, Icon } from 'components/index';
-import { CONSTANTS } from '../../../constants';
+import { Text } from 'components/index';
 
 import styles from './AuthLayout.module.scss';
 
@@ -13,9 +12,7 @@ interface IProps {
 const AuthLayout: React.FC<IProps> = ({ children, title }) => {
 	return (
 		<main className={styles['authLayout']}>
-			<Text type={'header'} className={styles['authLayout-title']}>
-				{title}
-			</Text>
+			<Text variant={'h4'}>{title}</Text>
 			<div className={styles.content}>{children}</div>
 		</main>
 	);

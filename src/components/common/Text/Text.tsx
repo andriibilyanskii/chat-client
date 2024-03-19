@@ -1,31 +1,15 @@
 import React from 'react';
-import classNames from 'classnames';
-
-import styles from './Text.module.scss';
+import { Typography } from '@mui/material';
 
 interface IProps {
-	type: 'b1' | 'b2' | 'header';
-	fontWeight?: 'regular' | 'medium' | 'bold';
-	className?: string;
+	variant: 'h4' | 'subtitle1';
 	children: React.ReactNode;
 }
 
 const Text: React.FC<IProps> = (props) => {
-	const { type, className, fontWeight = 'regular', children, ...rest } = props;
+	const { variant = 'subtitle1', children } = props;
 
-	return React.createElement(
-		type === 'header' ? 'h2' : 'p',
-		{
-			className: classNames({
-				[styles.text]: true,
-				[styles[`text_${type}`]]: true,
-				[styles[`text-weight_${fontWeight}`]]: type !== 'header',
-				[className || '']: className,
-			}),
-			...rest,
-		},
-		children
-	);
+	return <Typography variant={variant}>{children}</Typography>;
 };
 
 export default Text;

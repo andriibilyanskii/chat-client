@@ -3,11 +3,6 @@
 .authLayout {
 	@apply size-full flex flex-col justify-center items-center grow py-16 px-8;
 
-	&-title {
-		padding: 5rem 0 2.5rem 0;
-		display: inline-block;
-	}
-
 	.content {
 		@apply size-full flex flex-col justify-center items-center;
 
@@ -16,14 +11,6 @@
 	}
 
 	form {
-		@apply size-full flex flex-col justify-center items-center;
-
-		button {
-			margin-top: 30px;
-
-			&:nth-of-type(2) {
-				margin-top: 25px;
-			}
-		}
+		@apply size-full flex flex-col justify-center items-center gap-4 pt-12;
 	}
 }

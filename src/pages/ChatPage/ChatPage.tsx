@@ -1,12 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
-import { Text, AuthLayout, Link, Button, Icon, Input, AnimateHeight, WebSocket } from 'components';
+import {
+	Text,
+	AuthLayout,
+	Link,
+	Button,
+	Icon,
+	Input,
+	AnimateHeight,
+	Users,
+	ChatForm, ChatMessages,
+} from 'components';
 import { CONSTANTS } from '../../constants';
 
 import { fetchData, useAppContext } from 'utils';
 
 import styles from './ChatPage.module.scss';
+import {addMessage, addUsers, setUsers} from "../../store/data-reducer";
+import {useAppDispatch} from "../../store/redux-hooks";
 
 const userName = Date.now();
 
@@ -17,10 +30,11 @@ const ChatPage: React.FC = () => {
 
 	const history = useNavigate();
 
-	const [messages, setMessages] = useState<any[]>([]);
-	const [usersOnline, setUsersOnline] = useState<any[]>([]);
 	const [typingStatus, setTypingStatus] = useState('');
 	const lastMessageRef = useRef<any>(null);
+
+
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
 		if (userInfo?.username && socket.id) {
@@ -29,43 +43,29 @@ const ChatPage: React.FC = () => {
 	}, [socket.id, userInfo.username]);
 
 	useEffect(() => {
-		socket.on('messageResponse', (data: any) => setMessages([...messages, data]));
-	}, [socket, messages]);
+		socket.on('messageResponse', (data: any) => {
+			dispatch(addMessage(data))
 
-	useEffect(() => {
-		socket.on('newUserResponse', (data: any) => setUsersOnline([...usersOnline, ...data]));
-	}, [socket]);
-
-	useEffect(() => {
-		socket.on('onConnect', (data: any) => {
-			console.log(data);
-			setUsersOnline(data);
+			console.log({data})
 		});
 	}, [socket]);
 
 	useEffect(() => {
-		lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
-	}, [messages]);
+		socket.on('newUserResponse', (data: any) => dispatch(addUsers(data)));
+	}, [socket]);
+
+	useEffect(() => {
+		socket.on('onConnect', (data: any) => dispatch(setUsers(data)));
+	}, [socket]);
+
+	// useEffect(() => {
+	// 	lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
+	// }, [messages]);
 
 	return (
 		<div className={styles.chatPage}>
-			{JSON.stringify(userInfo)}
-
-			<Button
-				onClick={() => {
-					socket.emit('message', {
-						text: Date.now() + 'text',
-						usernameFrom: userInfo.username,
-						usernameTo: selectedChatUsername,
-						id: `${socket.id}${Math.random()}`,
-						socketID: socket.id,
-					});
-				}}
-			>
-				Click
-			</Button>
-			<pre>{JSON.stringify(messages, null, 5)}</pre>
-			<pre>{JSON.stringify(usersOnline, null, 5)}</pre>
+			<ChatMessages/>
+			<ChatForm />
 		</div>
 	);
 };

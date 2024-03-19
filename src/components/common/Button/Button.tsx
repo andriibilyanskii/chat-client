@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
+import { default as ButtonMUI } from '@mui/material/Button';
 
 import styles from './Button.module.scss';
 
@@ -10,23 +11,23 @@ interface IProps {
 	type?: 'button' | 'submit';
 	disabled?: boolean;
 	style?: CSSProperties;
-	buttonType?: 'default' | 'transparent_small' | 'transparent';
+	variant?: 'contained' | 'text' | 'outlined';
 }
 
 const Button: React.FC<IProps> = (props) => {
-	const { children, className, buttonType = 'default', ...rest } = props;
+	const { children, className, variant = 'contained', ...rest } = props;
 
 	return (
-		<button
+		<ButtonMUI
 			className={classNames({
 				[styles.button]: true,
-				[styles[`button_${buttonType}`]]: true,
 				[className || '']: Boolean(className),
 			})}
 			{...rest}
+			variant={variant}
 		>
 			{children}
-		</button>
+		</ButtonMUI>
 	);
 };
 

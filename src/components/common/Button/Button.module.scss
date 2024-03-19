@@ -2,25 +2,7 @@
 @import 'styles/fonts.module.scss';
 
 .button {
-	@include defaultButtonFont;
-	@apply rounded-lg size-full cursor-pointer;
-
-	&_default {
-		border: none;
-		background: $primary-blue;
-		color: $primary-white;
-		padding: 13px;
-	}
-
-	&_transparent {
-		border: 1.2px solid $gray-200;
-		padding: 14px;
-
-		&_small {
-			@apply rounded-md p-3.5 flex justify-center items-center gap-2.5 transition hover:bg-gray-100;
-			border: 1px solid $gray-200;
-		}
-	}
+	@apply size-full;
 
 	&:disabled {
 		@apply cursor-not-allowed;

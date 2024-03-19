@@ -21,9 +21,11 @@ body {
 		'Droid Sans',
 		'Helvetica Neue',
 		sans-serif;
-	overflow-x: hidden; /* for old browsers */
-	overflow-x: clip;
-	min-height: 100vh;
+	overflow: hidden; /* for old browsers */
+	overflow: clip;
+	max-height: 100vh;
+	max-height: 100dvh;
+
 }
 
 ::selection {

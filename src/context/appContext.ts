@@ -8,6 +8,8 @@ const options = {
 	userInfo: {} as IUserInfo,
 	setUserInfo: (info: IUserInfo) => {},
 	socket: {} as any,
+	receiverUsername: '',
+	setReceiverUsername: (name: '') => {},
 };
 
 const AppContext = React.createContext(options);
