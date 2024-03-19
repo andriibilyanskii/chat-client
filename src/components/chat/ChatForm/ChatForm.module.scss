@@ -3,7 +3,7 @@
 .chatForm {
 	background: $primary-white;
 
-	@apply w-full fixed bottom-0 p-4;
+	@apply fixed bottom-0 right-0 left-64 p-4;
 	display: grid;
 	grid-template-columns: 1fr auto;
 	gap: 1rem;

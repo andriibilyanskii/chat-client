@@ -16,6 +16,14 @@ export const Router = () => {
 						</PrivateRoute>
 					}
 				/>
+				<Route
+					path={'/:receiverUsername'}
+					element={
+						<PrivateRoute>
+							<ChatPage />
+						</PrivateRoute>
+					}
+				/>
 			</Route>
 
 			<Route path={'/auth'}>

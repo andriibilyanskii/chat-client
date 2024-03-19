@@ -1,5 +1,5 @@
 function formatDate(
-	dateString: string,
+	dateString: string | undefined,
 	params?: {
 		onlyHours?: boolean;
 		onlyDate?: boolean;

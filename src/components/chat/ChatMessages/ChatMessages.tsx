@@ -2,17 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
-import {
-	Text,
-	AuthLayout,
-	Link,
-	Button,
-	Icon,
-	Input,
-	AnimateHeight,
-	Users,
-	MessageCard,
-} from 'components';
+import { MessageCard } from 'components';
 
 import { fetchData, useAppContext } from 'utils';
 
@@ -20,11 +10,14 @@ import styles from './ChatMessages.module.scss';
 import { IMessage } from '../../../interfaces';
 import { useAppSelector } from '../../../store/redux-hooks';
 import { SELECTORS } from '../../../store/selectors';
+import classNames from 'classnames';
 
-const ChatPage: React.FC = () => {
+interface IProps {
+	className?: string;
+}
+
+const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 	const messages: IMessage[] = useAppSelector(SELECTORS.getChatStore)?.messages;
-
-	console.log(messages);
 
 	const ref = useRef<any>(null);
 
@@ -33,7 +26,12 @@ const ChatPage: React.FC = () => {
 	}, [messages]);
 
 	return (
-		<div className={styles.chatMessages}>
+		<div
+			className={classNames({
+				[styles['chatMessages']]: true,
+				[className]: className,
+			})}
+		>
 			{messages?.map((message, index) => (
 				<MessageCard
 					{...(index === messages?.length - 1

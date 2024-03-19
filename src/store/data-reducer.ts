@@ -21,15 +21,12 @@ export const chatSlice: any = createSlice({
 		setMessages: (state, action: PayloadAction<IMessage[]>) => {
 			state.messages = action.payload;
 		},
-		addUsers: (state, action: PayloadAction<IUserInfo[]>) => {
-			state.users = [...state.users, ...action.payload];
-		},
 		setUsers: (state, action: PayloadAction<IUserInfo[]>) => {
 			state.users = action.payload;
 		},
 	},
 });
 
-export const { addMessage, setMessages, addUsers, setUsers } = chatSlice.actions;
+export const { addMessage, setMessages, setUsers } = chatSlice.actions;
 
 export default chatSlice.reducer;

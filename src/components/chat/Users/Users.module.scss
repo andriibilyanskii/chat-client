@@ -1,4 +1,7 @@
 @import 'styles/colors.module';
 
 .users {
+	@apply w-64 p-4 flex flex-col gap-4;
+
+	border-right: 1px solid $gray-200;
 }

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@mui/material';
 
-import { Text, AuthLayout, Link, Button, Icon, Input, AnimateHeight, Users } from 'components';
+import { Text, AuthLayout, Link, Button, Input, Users } from 'components';
 
 import { fetchData, formatDate, useAppContext } from 'utils';
 

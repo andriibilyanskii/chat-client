@@ -1,12 +1,8 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Text, AuthLayout, Link, Button, Icon, Input, AnimateHeight } from 'components';
-import { CONSTANTS } from '../../constants';
-
-import { fetchData, useAppContext } from 'utils';
-
-import styles from './LoginPage.module.scss';
+import { AuthLayout, Button, Input } from 'components';
+import { useAppContext } from 'utils';
 
 const LoginPage: React.FC = () => {
 	const [username, setUsername] = useState('');
@@ -24,7 +20,7 @@ const LoginPage: React.FC = () => {
 					socket.emit('newUser', { username, socketID: socket.id });
 
 					localStorage.setItem('user', JSON.stringify({ username }));
-					setUserInfo({ username });
+					setUserInfo({ username, socketID: socket.id, isOnline: true });
 					history('/');
 				}}
 			>

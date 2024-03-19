@@ -1,0 +1,13 @@
+@import 'styles/colors.module';
+
+.userCard {
+	@apply w-full flex gap-4 items-center px-2 py-1;
+
+	&_selected {
+		background: $gray-100 !important;
+	}
+
+	&-username {
+		flex-grow: 1;
+	}
+}

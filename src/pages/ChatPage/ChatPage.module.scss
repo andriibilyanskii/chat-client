@@ -1,4 +1,20 @@
 @import 'styles/colors.module';
 
 .chatPage {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: 1fr auto;
+	grid-template-areas: 'users messages' 'users form';
+
+	&-usersArea {
+		grid-area: users;
+	}
+
+	&-messagesArea {
+		grid-area: messages;
+	}
+
+	&-formArea {
+		grid-area: form;
+	}
 }

@@ -1,41 +1,51 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import React, { FormEvent, useCallback, useState } from 'react';
 
-import { Text, AuthLayout, Link, Button, Icon, Input, AnimateHeight, Users } from 'components';
+import { Button, Input } from 'components';
 
-import { fetchData, useAppContext } from 'utils';
+import { useAppContext } from 'utils';
 
 import styles from './ChatForm.module.scss';
-import {IMessage} from "../../../interfaces";
+import { IMessage } from '../../../interfaces';
+import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 
-const ChatPage: React.FC = () => {
+interface IProps {
+	className?: string;
+}
+
+const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 	const [text, setText] = useState('');
 	const { userInfo, socket } = useAppContext();
+	const { receiverUsername } = useParams();
 
-	const sendMessage = (e: FormEvent<HTMLFormElement>) => {
-		e?.preventDefault();
+	const sendMessage = useCallback(
+		(e: FormEvent<HTMLFormElement>) => {
+			e?.preventDefault();
 
-		if (text) {
-			const message:IMessage ={
-				text: text,
-				usernameFrom: userInfo.username,
-				usernameTo: 'selectedChatUsername',
-				id: `${socket.id}${Math.random()}`,
-				socketID: socket.id,
-				createdDate: new Date().toISOString()
+			if (text && receiverUsername) {
+				const message: IMessage = {
+					text: text,
+					usernameFrom: userInfo.username,
+					usernameTo: receiverUsername,
+					id: `${socket.id}${Math.random()}`,
+					socketID: socket.id,
+					createdDate: new Date().toISOString(),
+				};
+
+				socket.emit('message', message);
+
+				setText('');
 			}
-
-			socket.emit('message', message);
-
-			setText('');
-		}
-
-	}
+		},
+		[text, receiverUsername, userInfo.username, socket]
+	);
 
 	return (
 		<form
-			className={styles.chatForm}
+			className={classNames({
+				[styles['chatForm']]: true,
+				[className]: className,
+			})}
 			onSubmit={sendMessage}
 		>
 			<Input
