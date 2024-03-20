@@ -1,16 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import {CircularProgress, Grid} from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 
 import { MessageCard, Text } from 'components';
+import { IMessage } from 'interfaces';
 
-import { fetchData, useAppContext } from 'utils';
+import { useAppSelector } from 'store/redux-hooks';
+import { SELECTORS } from 'store/selectors';
 
 import styles from './ChatMessages.module.scss';
-import { IMessage } from '../../../interfaces';
-import { useAppSelector } from '../../../store/redux-hooks';
-import { SELECTORS } from '../../../store/selectors';
-import classNames from 'classnames';
 
 interface IProps {
 	className?: string;
@@ -34,7 +32,8 @@ const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 				[className]: className,
 			})}
 		>
-			{receiverUsername&&messages?.length > 0 &&
+			{receiverUsername &&
+				messages?.length > 0 &&
 				messages?.map((message, index) => (
 					<MessageCard
 						{...(index === messages?.length - 1
@@ -52,8 +51,6 @@ const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 					{!receiverUsername ? 'Select chat' : 'Write something...'}
 				</Text>
 			)}
-
-
 		</div>
 	);
 };

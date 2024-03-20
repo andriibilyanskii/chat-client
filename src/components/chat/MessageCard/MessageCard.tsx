@@ -1,16 +1,13 @@
-import React, { LegacyRef, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardContent } from '@mui/material';
+import { Card } from '@mui/material';
 
-import { Text, AuthLayout, Link, Button, Input, Users } from 'components';
+import { Text } from 'components';
 
-import { fetchData, formatDate, useAppContext } from 'utils';
+import { formatDate, useAppContext } from 'utils';
+import { IMessage } from 'interfaces';
 
 import styles from './MessageCard.module.scss';
-import { IMessage } from '../../../interfaces';
-import { useAppSelector } from '../../../store/redux-hooks';
-import { SELECTORS } from '../../../store/selectors';
 
 interface IProps {
 	message: IMessage;

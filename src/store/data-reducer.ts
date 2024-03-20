@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserInfo, IMessage } from '../interfaces';
+
+import { IUserInfo, IMessage } from 'interfaces';
 
 interface InitialStateProps {
 	messages: Array<IMessage>;

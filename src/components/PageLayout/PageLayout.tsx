@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Header } from '../index';
+import { Header } from 'components';
 
 import styles from './PageLayout.module.scss';
 

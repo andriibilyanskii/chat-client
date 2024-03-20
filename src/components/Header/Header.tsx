@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, Button, IconButton } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Chat, ArrowBack } from '@mui/icons-material';
+import { Chat, ArrowBack, Logout } from '@mui/icons-material';
 
-import { Text } from '../index';
-import { useAppContext } from '../../utils';
-import { IUserInfo } from '../../interfaces';
+import { Text } from 'components';
+import { useAppContext } from 'utils';
+import { IUserInfo } from 'interfaces';
 
-import { useAppSelector } from '../../store/redux-hooks';
-import { SELECTORS } from '../../store/selectors';
+import { useAppSelector } from 'store/redux-hooks';
+import { SELECTORS } from 'store/selectors';
 
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
-	const { setUserInfo } = useAppContext();
+	const { userInfo, setUserInfo } = useAppContext();
 	const { receiverUsername } = useParams();
 	const users: IUserInfo[] = useAppSelector(SELECTORS.getChatStore)?.users;
 
@@ -32,14 +32,16 @@ const Header: React.FC = () => {
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static'>
 				<Toolbar className={styles['header-toolbar']} sx={{ display: 'grid' }}>
-					{receiverUsername?<IconButton
-						onClick={() => history('/')}
-						className={styles['header-toolbar-icon']}
-					>
-
-							<ArrowBack/>
-
-					</IconButton>:<Chat/>}
+					{receiverUsername ? (
+						<IconButton
+							onClick={() => history('/')}
+							className={styles['header-toolbar-icon']}
+						>
+							<ArrowBack />
+						</IconButton>
+					) : (
+						<Chat />
+					)}
 
 					<Text
 						variant='h6'
@@ -60,9 +62,20 @@ const Header: React.FC = () => {
 							{isReceiverOnline ? 'Online' : 'Offline'}
 						</Text>
 					</Text>
-					<Button color='inherit' onClick={logout}>
-						Logout
-					</Button>
+
+					<Text
+						variant='h6'
+						component='div'
+						sx={{
+							visibility: receiverUsername ? 'hidden' : 'visible',
+						}}
+					>
+						{userInfo?.username}
+					</Text>
+
+					<IconButton onClick={logout}>
+						<Logout />
+					</IconButton>
 				</Toolbar>
 			</AppBar>
 		</Box>

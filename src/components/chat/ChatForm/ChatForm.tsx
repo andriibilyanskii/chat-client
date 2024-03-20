@@ -1,13 +1,12 @@
-import React, {FormEvent, useCallback, useEffect, useState} from 'react';
+import React, { FormEvent, useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { Button, Input } from 'components';
-
 import { useAppContext } from 'utils';
+import { IMessage } from 'interfaces';
 
 import styles from './ChatForm.module.scss';
-import { IMessage } from '../../../interfaces';
-import classNames from 'classnames';
-import { useParams } from 'react-router-dom';
 
 interface IProps {
 	className?: string;
@@ -18,9 +17,9 @@ const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 	const { userInfo, socket } = useAppContext();
 	const { receiverUsername } = useParams();
 
-	useEffect(()=>{
-		setText('')
-	}, [receiverUsername])
+	useEffect(() => {
+		setText('');
+	}, [receiverUsername]);
 
 	const sendMessage = useCallback(
 		(e: FormEvent<HTMLFormElement>) => {

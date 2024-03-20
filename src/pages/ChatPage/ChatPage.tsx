@@ -1,31 +1,26 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { Users, ChatForm, ChatMessages } from 'components';
 
+import { IMessage } from 'interfaces';
 import { fetchData, useAppContext } from 'utils';
 
-import { addMessage, setMessages, setUsers } from '../../store/data-reducer';
-import { useAppDispatch, useAppSelector } from '../../store/redux-hooks';
+import { addMessage, setMessages, setUsers } from 'store/data-reducer';
+import { useAppDispatch } from 'store/redux-hooks';
 
 import styles from './ChatPage.module.scss';
-import { useParams } from 'react-router-dom';
-import { IMessage, IUserInfo } from '../../interfaces';
-import { SELECTORS } from '../../store/selectors';
-import classNames from "classnames";
 
 const ChatPage: React.FC = () => {
 	const { userInfo, socket, setShowLoader } = useAppContext();
 	const { receiverUsername } = useParams();
-	const users: IUserInfo[] = useAppSelector(SELECTORS.getChatStore)?.users;
 
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		let isConnected = false;
-
 		const interval = setInterval(() => {
 			if (userInfo?.username && socket.id) {
-				isConnected = true;
 				socket.emit('newUser', { username: userInfo?.username, socketID: socket.id });
 
 				clearInterval(interval);
@@ -48,7 +43,6 @@ const ChatPage: React.FC = () => {
 					(data?.usernameFrom === receiverUsername &&
 						data?.usernameTo === userInfo?.username))
 			) {
-				console.log(data);
 				dispatch(addMessage(data));
 			}
 		});
@@ -92,11 +86,13 @@ const ChatPage: React.FC = () => {
 	}, [receiverUsername, userInfo?.username]);
 
 	return (
-		<div className={classNames({
-			[styles.chatPage]:true,
-			[styles.chatPage_showChat]:receiverUsername,
-			[styles.chatPage_showUsers]:!receiverUsername,
-		})}>
+		<div
+			className={classNames({
+				[styles.chatPage]: true,
+				[styles.chatPage_showChat]: receiverUsername,
+				[styles.chatPage_showUsers]: !receiverUsername,
+			})}
+		>
 			<Users className={styles['chatPage-usersArea']} />
 			<ChatMessages className={styles['chatPage-messagesArea']} />
 			<ChatForm className={styles['chatPage-formArea']} />

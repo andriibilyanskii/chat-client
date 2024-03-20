@@ -6,7 +6,6 @@ import { useAppContext } from 'utils';
 
 const LoginPage: React.FC = () => {
 	const [username, setUsername] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
 	const { setUserInfo, socket } = useAppContext();
 
 	const history = useNavigate();
@@ -29,7 +28,6 @@ const LoginPage: React.FC = () => {
 					onChange={setUsername}
 					placeholder={'Enter username'}
 					name={'username'}
-					disabled={isLoading}
 					label={'Username'}
 					autoFocus={true}
 				/>
