@@ -4,7 +4,6 @@ export { default as Text } from './common/Text/Text';
 export { default as Link } from './common/Link/Link';
 export { default as NotificationToast } from './common/NotificationToast/NotificationToast';
 export { default as PrivateRoute } from './common/PrivateRoute/PrivateRoute';
-export { default as Loader } from './common/Loader/Loader';
 
 export { default as Header } from './Header/Header';
 export { default as PageLayout } from './PageLayout/PageLayout';

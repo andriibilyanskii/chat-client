@@ -11,6 +11,7 @@ import styles from './ChatPage.module.scss';
 import { useParams } from 'react-router-dom';
 import { IMessage, IUserInfo } from '../../interfaces';
 import { SELECTORS } from '../../store/selectors';
+import classNames from "classnames";
 
 const ChatPage: React.FC = () => {
 	const { userInfo, socket, setShowLoader } = useAppContext();
@@ -47,7 +48,7 @@ const ChatPage: React.FC = () => {
 					(data?.usernameFrom === receiverUsername &&
 						data?.usernameTo === userInfo?.username))
 			) {
-				console.log(data)
+				console.log(data);
 				dispatch(addMessage(data));
 			}
 		});
@@ -68,10 +69,7 @@ const ChatPage: React.FC = () => {
 	useEffect(() => {
 		let ignore = false;
 
-		if (
-			userInfo?.username &&
-			receiverUsername
-		) {
+		if (userInfo?.username && receiverUsername) {
 			fetchData(
 				'/messages/' + userInfo?.username + '/' + receiverUsername,
 				true,
@@ -81,7 +79,7 @@ const ChatPage: React.FC = () => {
 				{
 					setIsLoading: setShowLoader,
 				}
-			)?.then(({messages}) => {
+			)?.then(({ messages }) => {
 				if (!ignore) {
 					dispatch(setMessages(messages));
 				}
@@ -94,7 +92,11 @@ const ChatPage: React.FC = () => {
 	}, [receiverUsername, userInfo?.username]);
 
 	return (
-		<div className={styles.chatPage}>
+		<div className={classNames({
+			[styles.chatPage]:true,
+			[styles.chatPage_showChat]:receiverUsername,
+			[styles.chatPage_showUsers]:!receiverUsername,
+		})}>
 			<Users className={styles['chatPage-usersArea']} />
 			<ChatMessages className={styles['chatPage-messagesArea']} />
 			<ChatForm className={styles['chatPage-formArea']} />

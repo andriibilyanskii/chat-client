@@ -17,4 +17,25 @@
 	&-formArea {
 		grid-area: form;
 	}
+
+	@media screen and (max-width: 767px) {
+
+		&_showChat {
+			grid-template-columns: 1fr;
+			grid-template-areas: 'messages' 'form';
+
+			.chatPage-usersArea {
+				display: none;
+			}
+		}
+
+		&_showUsers {
+			grid-template-columns: 1fr;
+			grid-template-areas: 'users' 'users';
+
+			.chatPage-messagesArea {
+				display: none;
+			}
+		}
+	}
 }

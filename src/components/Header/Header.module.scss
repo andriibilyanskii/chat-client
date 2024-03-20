@@ -1,5 +1,16 @@
 .header {
 	&-toolbar {
-		grid-template-columns: 16rem 1fr auto;
+		grid-template-columns: 15rem 1fr auto;
+		gap: 1rem;
+
+		&-icon {
+			width: fit-content;
+		}
+	}
+
+	@media screen and (max-width: 767px) {
+		&-toolbar {
+			grid-template-columns: auto 1fr auto;
+		}
 	}
 }

@@ -4,4 +4,11 @@
 	@apply w-64 p-4 flex flex-col gap-4;
 
 	border-right: 1px solid $gray-200;
+
+	@media screen and (max-width: 767px) {
+		@apply size-full grow;
+
+		height: calc(100vh - 64px);
+		height: calc(100dvh - 64px);
+	}
 }

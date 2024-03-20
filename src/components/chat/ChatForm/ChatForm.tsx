@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from 'react';
+import React, {FormEvent, useCallback, useEffect, useState} from 'react';
 
 import { Button, Input } from 'components';
 
@@ -17,6 +17,10 @@ const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 	const [text, setText] = useState('');
 	const { userInfo, socket } = useAppContext();
 	const { receiverUsername } = useParams();
+
+	useEffect(()=>{
+		setText('')
+	}, [receiverUsername])
 
 	const sendMessage = useCallback(
 		(e: FormEvent<HTMLFormElement>) => {
@@ -39,6 +43,10 @@ const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 		},
 		[text, receiverUsername, userInfo.username, socket]
 	);
+
+	if (!receiverUsername) {
+		return null;
+	}
 
 	return (
 		<form

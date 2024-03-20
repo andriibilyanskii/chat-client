@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import {CircularProgress, Grid} from '@mui/material';
 
 import { MessageCard, Text } from 'components';
 
@@ -34,7 +34,7 @@ const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 				[className]: className,
 			})}
 		>
-			{messages?.length > 0 &&
+			{receiverUsername&&messages?.length > 0 &&
 				messages?.map((message, index) => (
 					<MessageCard
 						{...(index === messages?.length - 1
@@ -52,6 +52,8 @@ const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 					{!receiverUsername ? 'Select chat' : 'Write something...'}
 				</Text>
 			)}
+
+
 		</div>
 	);
 };

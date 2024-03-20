@@ -1,9 +1,0 @@
-@import 'styles/colors.module.scss';
-@import 'styles/fonts.module.scss';
-
-.loader {
-	@apply fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center;
-
-	background: rgba($primary-white, 0.5);
-	backdrop-filter: blur(2px);
-}
