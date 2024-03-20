@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
 			>
 				<Input
 					value={username}
-					onChange={setUsername}
+					onChange={(e) => setUsername(e.toLowerCase()?.replace(/\s/gi, '_'))}
 					placeholder={'Enter username'}
 					name={'username'}
 					label={'Username'}
