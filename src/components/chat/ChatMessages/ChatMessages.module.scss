@@ -5,5 +5,9 @@
 	height: calc(100dvh - 64px);
 	padding: 1rem 1rem 6.5rem 1rem;
 
-	@apply overflow-y-auto flex flex-col gap-4;
+	@apply overflow-y-auto flex flex-col gap-4 grow;
+
+	&_empty {
+		@apply items-center justify-center;
+	}
 }

@@ -21,15 +21,6 @@ const UserCard: React.FC<IProps> = ({ user }) => {
 	const { userInfo } = useAppContext();
 	const { receiverUsername } = useParams();
 
-	const messages: IMessage[] = useAppSelector(SELECTORS.getChatStore)?.messages;
-	const message = messages
-		?.filter(
-			(m) =>
-				(m?.usernameFrom === userInfo?.username && m?.usernameTo === user?.username) ||
-				(m?.usernameFrom === user?.username && m?.usernameTo === userInfo?.username)
-		)
-		?.at(-1);
-
 	return (
 		<Link to={'/' + user?.username}>
 			<Card
@@ -43,12 +34,6 @@ const UserCard: React.FC<IProps> = ({ user }) => {
 				</Icon>
 
 				<Text className={styles['userCard-username']}>{user?.username}</Text>
-
-				<Text variant={'caption'}>
-					{formatDate(message?.createdDate, {
-						onlyHours: true,
-					})}
-				</Text>
 			</Card>
 		</Link>
 	);

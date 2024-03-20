@@ -4,7 +4,7 @@ import { Users, ChatForm, ChatMessages } from 'components';
 
 import { fetchData, useAppContext } from 'utils';
 
-import { addMessage, setUsers } from '../../store/data-reducer';
+import { addMessage, setMessages, setUsers } from '../../store/data-reducer';
 import { useAppDispatch, useAppSelector } from '../../store/redux-hooks';
 
 import styles from './ChatPage.module.scss';
@@ -13,7 +13,7 @@ import { IMessage, IUserInfo } from '../../interfaces';
 import { SELECTORS } from '../../store/selectors';
 
 const ChatPage: React.FC = () => {
-	const { userInfo, socket } = useAppContext();
+	const { userInfo, socket, setShowLoader } = useAppContext();
 	const { receiverUsername } = useParams();
 	const users: IUserInfo[] = useAppSelector(SELECTORS.getChatStore)?.users;
 
@@ -47,8 +47,8 @@ const ChatPage: React.FC = () => {
 					(data?.usernameFrom === receiverUsername &&
 						data?.usernameTo === userInfo?.username))
 			) {
+				console.log(data)
 				dispatch(addMessage(data));
-				console.log({ data });
 			}
 		});
 
@@ -66,13 +66,32 @@ const ChatPage: React.FC = () => {
 	}, [socket]);
 
 	useEffect(() => {
-		if (receiverUsername && users?.find((u) => u?.username === receiverUsername)) {
-			// do it with socket
-			// fetchData('/messages/'+receiverUsername, true, {
-			// 	method:'GET'
-			// })?.then(e=>console.log(e))
+		let ignore = false;
+
+		if (
+			userInfo?.username &&
+			receiverUsername
+		) {
+			fetchData(
+				'/messages/' + userInfo?.username + '/' + receiverUsername,
+				true,
+				{
+					method: 'GET',
+				},
+				{
+					setIsLoading: setShowLoader,
+				}
+			)?.then(({messages}) => {
+				if (!ignore) {
+					dispatch(setMessages(messages));
+				}
+			});
 		}
-	}, [receiverUsername, users]);
+
+		return () => {
+			ignore = true;
+		};
+	}, [receiverUsername, userInfo?.username]);
 
 	return (
 		<div className={styles.chatPage}>

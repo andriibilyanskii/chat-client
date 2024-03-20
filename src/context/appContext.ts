@@ -7,9 +7,9 @@ import { IUserInfo } from 'interfaces';
 const options = {
 	userInfo: {} as IUserInfo,
 	setUserInfo: (info: IUserInfo) => {},
+	showLoader: false,
+	setShowLoader: (toShow: boolean) => {},
 	socket: {} as any,
-	receiverUsername: '',
-	setReceiverUsername: (name: '') => {},
 };
 
 const AppContext = React.createContext(options);

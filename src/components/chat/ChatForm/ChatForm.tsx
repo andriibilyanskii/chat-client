@@ -54,6 +54,7 @@ const ChatPage: React.FC<IProps> = ({ className = '' }) => {
 				placeholder={'Enter message'}
 				autoFocus={true}
 				required={true}
+				name={'text'}
 			/>
 			<Button type={'submit'} className={styles['chatForm-sendButton']}>
 				Send

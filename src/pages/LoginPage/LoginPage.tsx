@@ -31,6 +31,7 @@ const LoginPage: React.FC = () => {
 					name={'username'}
 					disabled={isLoading}
 					label={'Username'}
+					autoFocus={true}
 				/>
 
 				<Button type={'submit'} disabled={!username}>
