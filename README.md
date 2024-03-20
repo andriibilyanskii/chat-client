@@ -10,6 +10,8 @@ The application shows users who have ever logged into their account.
 
 #
 
+Preferred Node.js version: `20.9.0`
+
 ## Available Scripts
 
 In the project directory, you can run:
